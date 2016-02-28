@@ -1,0 +1,37 @@
+LDAP Attributes Collector
+
+This class implements a collector that retrieves attributes from a directory
+server accessed via LDAP protocol.
+
+It has the following options:
+
+  - host: LDAP server host
+  - port: LDAP server port
+  - protocol: LDAP protocol
+  - binddn: The username which should be used when connecting to the LDAP
+            server.
+  - password: The password which should be used when connecting to the LDAP
+              server.
+  - basedn:   DN to start the LDAP search
+  - attrlist: An associative array of [LDAP attr1 => atr1, LDAP attr2 => atr2]. 
+              This parameter is optional. Remove this param to get all attrs
+  - searchfilter: filter used to search the directory. You can use the special
+  :uidfield string to refer the value of the field specified as an uidfield in
+  the processor
+ 
+  Example configuration:
+ 
+  'collector' => array(
+ 		 'class' => 'attributecollector:LDAPCollector',
+                'host' => 'myldap.srv',
+ 		 'port' => 389,
+ 		 'binddn' => 'cn=myuser',
+ 		 'password' => 'yaco0909',
+ 		 'basedn' => 'dc=my,dc=org',
+ 		 'searchfilter' => 'uid=:uidfield',
+         'protocol' => 3,
+ 		 'attrlist' => array(
+ 			 // LDAP attr => real attr
+ 			 'objectClass' => 'myClasses',
+                ),
+             ),

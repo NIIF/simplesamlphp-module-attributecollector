@@ -1,0 +1,8 @@
+{
+    "name": "niif/simplesamlphp-module-attributecollector",
+    "description": "Collect attributes from backend databases like sql or ldap",
+    "type": "simplesamlphp-module",
+    "require": {
+        "simplesamlphp/composer-module-installer": "~1.0"
+    }
+}

@@ -1,0 +1,44 @@
+SQL Attributes Collector
+
+This class implements a collector that retrieves attributes from a database.
+It shoud word against both MySQL and PostgreSQL
+
+It has the following options:
+- dsn: The DSN which should be used to connect to the database server. Check the various
+       database drivers in http://php.net/manual/en/pdo.drivers.php for a description of
+       the various DSN formats.
+- username: The username which should be used when connecting to the database server.
+- password: The password which should be used when connecting to the database server.
+- query: The sql query for retrieve attributes. You can use the special :uidfield string
+         to refer the value of the field especified as an uidfield in the processor.
+
+
+Example - with PostgreSQL database:
+
+ 'collector' => array(
+	'class' => 'attributecollector:SQLCollector',
+	'dsn' => 'pgsql:host=localhost;dbname=simplesaml',
+	'username' => 'simplesaml',
+	'password' => 'secretpassword',
+	'query' => array("SELECT address, phone, country from extraattributes where uid=:uidfield"),
+	'get_all_query' => array("SELECT address, phone, country from extraattributes),
+ )
+
+SQLCollector allows to specify several database connections which will
+be used sequentially when a connection fails. This can be done
+by defining each parameter by using an array.
+
+Example:
+ 'collector' => array(
+         'class' => 'attributecollector:SQLCollector',
+         'dsn' => array('oci:dbname=first',
+                 'mysql:host=localhost;dbname=second'),
+         'username' => array('first', 'second'),
+         'password' => array('first', 'second'),
+         'query' => array("SELECT sid as SUBJECT from subjects where uid=:uidfield",
+                          "SELECT sid as SUBJECT from subjects2 where uid=:uidfield AND status='OK'"
+                         ),
+        'get_all_query' => array("SELECT sid as SUBJECT from subjects",
+                                 "SELECT sid as SUBJECT from subjects2"
+                         ),
+  )
