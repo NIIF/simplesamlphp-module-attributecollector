@@ -230,7 +230,7 @@ class sspmod_attributecollector_Collector_SQLCOllector extends sspmod_attributec
 			try {
 				$this->db = new PDO($this->dsn[$i], $this->username[$i], $this->password[$i]);
 			} catch (PDOException $e) {
-				SimpleSAML_Logger::error('attributecollector:SQLCollector - skipping ' . $this->dsn[$i] . ': ' . $e->getMessage());
+				SimpleSAML\Logger::error('attributecollector:SQLCollector - skipping ' . $this->dsn[$i] . ': ' . $e->getMessage());
 				// Error connecting to i-th database
 				continue;
 			}

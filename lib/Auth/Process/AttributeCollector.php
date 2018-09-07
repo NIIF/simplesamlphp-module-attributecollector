@@ -20,7 +20,7 @@ class sspmod_attributecollector_Auth_Process_AttributeCollector extends SimpleSA
 			throw new Exception('No collector class specified in configuration');
 		}
 		$collectorConfig = $config["collector"];
-		$collectorClassName = SimpleSAML_Module::resolveClass($collectorConfig['class'], 'Collector', 'sspmod_attributecollector_SimpleCollector');
+		$collectorClassName = SimpleSAML\Module::resolveClass($collectorConfig['class'], 'Collector', 'sspmod_attributecollector_SimpleCollector');
 		unset($collectorConfig['class']);
 		return new $collectorClassName($collectorConfig);
 	}
